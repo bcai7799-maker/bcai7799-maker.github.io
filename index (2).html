@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borui Cai — Health Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #16181D;
+  --surface: #1E2128;
+  --surface-2: #252932;
+  --border: #2E333D;
+  --text: #E4E6EB;
+  --text-dim: #9BA1AC;
+  --accent: #5EBAA8;
+  --accent-dim: #3E7d72;
+  --gold: #C9A96A;
+  --code-bg: #1A1D23;
+  --shadow: rgba(0,0,0,0.3);
+}
+[data-theme="light"] {
+  --bg: #FBFBF9;
+  --surface: #FFFFFF;
+  --surface-2: #F3F4F1;
+  --border: #E3E4E0;
+  --text: #1C1F26;
+  --text-dim: #5E636E;
+  --accent: #2E8B7A;
+  --accent-dim: #6FBFB0;
+  --gold: #A6863F;
+  --code-bg: #F5F6F4;
+  --shadow: rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.65;
+  font-size: 16px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* ---- Nav ---- */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+nav .name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+nav .links { display: flex; gap: 22px; align-items: center; }
+nav .links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+nav .links a:hover { color: var(--accent); }
+.theme-btn {
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text); width: 34px; height: 34px; border-radius: 8px;
+  cursor: pointer; display: grid; place-items: center; font-size: 15px;
+  transition: all 0.2s;
+}
+.theme-btn:hover { border-color: var(--accent); }
+@media (max-width: 600px) { nav .links a:not(.theme-wrap a) { display: none; } }
+
+/* ---- Hero ---- */
+header { padding: 90px 0 60px; border-bottom: 1px solid var(--border); }
+header .role {
+  color: var(--accent); font-size: 14px; font-weight: 600;
+  letter-spacing: 0.02em; margin-bottom: 18px;
+}
+header h1 {
+  font-size: clamp(34px, 6vw, 52px); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 22px;
+}
+header .intro { font-size: 18px; color: var(--text-dim); max-width: 620px; }
+header .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 28px; font-size: 14px; }
+header .meta span { color: var(--text-dim); }
+header .meta strong { color: var(--text); font-weight: 500; }
+header .contact { margin-top: 24px; }
+header .contact a {
+  color: var(--accent); text-decoration: none; font-size: 15px;
+  border-bottom: 1px solid var(--accent-dim); padding-bottom: 1px;
+}
+header .contact a:hover { border-color: var(--accent); }
+
+/* ---- Section ---- */
+section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.sec-label {
+  font-size: 13px; color: var(--text-dim); font-weight: 600;
+  margin-bottom: 8px;
+}
+section > .wrap > h2 {
+  font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 32px;
+}
+.prose p { color: var(--text-dim); margin-bottom: 14px; }
+.prose p:last-child { margin-bottom: 0; }
+
+/* ---- Project ---- */
+.project { margin-bottom: 44px; }
+.project:last-child { margin-bottom: 0; }
+.project.core {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px; box-shadow: 0 2px 20px var(--shadow);
+}
+.project .ptitle { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.project h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; }
+.project .tag {
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  padding: 3px 10px; border-radius: 20px;
+}
+.project .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 18px; }
+.project .desc { margin-bottom: 20px; }
+.project .desc p { color: var(--text-dim); margin-bottom: 12px; }
+.project .desc strong { color: var(--text); font-weight: 600; }
+
+/* result chips */
+.results { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.chip {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px; min-width: 90px;
+}
+.chip .num { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+.chip .lbl { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+.stack { display: flex; flex-wrap: wrap; gap: 7px; }
+.stack span {
+  font-size: 12.5px; color: var(--text-dim);
+  background: var(--surface-2); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ---- Code block ---- */
+.code-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--text-dim); margin: 28px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; overflow-x: auto;
+  margin-top: 10px; font-size: 13px; line-height: 1.7;
+}
+code { font-family: 'JetBrains Mono', monospace; color: var(--text); }
+.cm { color: var(--text-dim); }         /* comment */
+.kw { color: var(--accent); }           /* keyword */
+.fn { color: var(--gold); }             /* function */
+.st { color: #C88B8B; }                 /* string */
+[data-theme="light"] .st { color: #A85A5A; }
+
+/* ---- Skills ---- */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.skill-group h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+.skill-group ul { list-style: none; }
+.skill-group li { color: var(--text-dim); font-size: 14px; padding: 3px 0; }
+
+/* ---- Footer ---- */
+footer { padding: 50px 0 70px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+footer p { color: var(--text-dim); font-size: 14px; }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+a.link-inline { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
+a.link-inline:hover { border-color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="name">Borui Cai</span>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#work">Projects</a>
+      <a href="#skills">Skills</a>
+      <span class="theme-wrap">
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">◐</button>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <h1>I turn messy clinical data into answers you can act on.</h1>
+    <p class="intro">
+      I build reproducible pipelines and prediction models on real-world health
+      records — from statin drug-response phenotyping to survival analysis in
+      large cancer cohorts.
+    </p>
+    <div class="meta">
+      <span><strong>MS</strong> Health Data Science, UCSF</span>
+      <span><strong>BS</strong> Statistics &amp; Data Science, UCSB</span>
+    </div>
+    <div class="contact">
+      <a href="mailto:bcai7799@gmail.com">bcai7799@gmail.com</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-label">About</div>
+    <div class="prose">
+      <p>
+        I'm a health data science student finishing my master's at UCSF. My work
+        sits at the intersection of biostatistics and machine learning applied to
+        electronic health records — building analytic datasets from raw clinical
+        extracts, engineering features, and fitting interpretable models.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-label">Projects</div>
+    <h2>Selected work</h2>
+
+    <!-- CORE PROJECT -->
+    <div class="project core">
+      <div class="ptitle">
+        <h3>Predicting Statin LDL-C Response with Machine Learning</h3>
+        <span class="tag">Capstone</span>
+      </div>
+      <div class="sub">First-author manuscript · Kaiser GERA cohort (N ≈ 34,800) · R</div>
+
+      <div class="desc">
+        <p>
+          Statin type and dose strongly shape how much a patient's LDL cholesterol
+          drops — but can machine learning predict individual response better than
+          traditional regression? I built the full pipeline to find out, using
+          real-world EHR data from more than 34,000 statin initiators.
+        </p>
+        <p>
+          I assembled the analytic dataset from raw Kaiser extracts, engineered two
+          predictor sets (a baseline clinical set and an expanded EHR set), and
+          compared <strong>linear regression, random forest, and XGBoost</strong> on
+          a held-out test set with cross-validation.
+        </p>
+        <p>
+          The finding: <strong>machine learning did not outperform linear
+          regression</strong>. All models explained roughly 13% of the variance —
+          matching the published benchmark for this cohort. A nested-R² analysis
+          showed why: statin type and dose account for almost all the signal, and
+          the relationship is close to linear, leaving little for ML to exploit.
+        </p>
+      </div>
+
+      <div class="results">
+        <div class="chip"><div class="num">0.13</div><div class="lbl">Test R² (all models)</div></div>
+        <div class="chip"><div class="num">34,841</div><div class="lbl">Patients</div></div>
+        <div class="chip"><div class="num">3</div><div class="lbl">Models compared</div></div>
+        <div class="chip"><div class="num">1st</div><div class="lbl">Author</div></div>
+      </div>
+
+      <div class="stack">
+        <span>R</span><span>data.table</span><span>caret</span><span>ranger</span>
+        <span>xgboost</span><span>cross-validation</span><span>bootstrap CI</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project">
+      <div class="ptitle">
+        <h3>Radiation Therapy &amp; Tumor Laterality in Breast Cancer Survival</h3>
+      </div>
+      <div class="sub">Survival analysis · METABRIC cohort (N = 1,981) · R</div>
+      <div class="desc">
+        <p>
+          Does the survival benefit of radiation therapy depend on which side of
+          the body the tumor is on? Left-sided breast tumors sit closer to the
+          heart, raising long-standing concerns about radiation cardiotoxicity.
+          I tested whether tumor laterality modifies the effect of radiation on
+          overall survival.
+        </p>
+        <p>
+          Using the METABRIC cohort, I fit <strong>stratified Cox proportional
+          hazards models</strong> with a radiation × laterality interaction term,
+          handled ~30% non-random missingness with multiple imputation (MICE), and
+          addressed proportional-hazards violations by stratifying on five
+          covariates. I validated the model with bootstrap resampling.
+        </p>
+        <p>
+          Radiation was associated with a <strong>31% reduction in the hazard of
+          death</strong> (HR 0.69), and the benefit did <em>not</em> differ
+          meaningfully by tumor side — reassuring evidence that modern radiation
+          helps left- and right-sided patients alike.
+        </p>
+      </div>
+      <div class="results">
+        <div class="chip"><div class="num">0.69</div><div class="lbl">HR (radiation)</div></div>
+        <div class="chip"><div class="num">0.73</div><div class="lbl">C-index</div></div>
+        <div class="chip"><div class="num">1,981</div><div class="lbl">Patients</div></div>
+      </div>
+      <div class="stack">
+        <span>R</span><span>survival</span><span>Cox PH</span><span>MICE</span>
+        <span>Kaplan–Meier</span><span>bootstrap validation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap">
+    <div class="sec-label">Code</div>
+    <h2>How the capstone pipeline works</h2>
+    <div class="prose" style="margin-bottom: 8px;">
+      <p>A few representative snippets from the statin project — data paths and
+      identifiers removed. Full code available on request.</p>
+    </div>
+
+    <div class="code-head"><span>01 — Feature engineering (rolling join)</span><span>R</span></div>
+    <pre><code><span class="cm"># grab the closest lab value before statin start (within 1 yr)</span>
+labs <span class="kw">&lt;-</span> labs[order(SUBJID, lab_date)]
+setkey(cohort, SUBJID, index_date)
+
+matched <span class="kw">&lt;-</span> labs[cohort,
+  on = .(SUBJID, lab_date = index_date),
+  roll = 365,                      <span class="cm"># look back up to 1 year</span>
+  .(SUBJID, ALT = x.value)]
+
+<span class="cm"># impute median, but flag what was missing</span>
+cohort[, ALT_missing := as.integer(is.na(ALT))]
+cohort[, ALT_imputed := fifelse(is.na(ALT), median(ALT, na.rm = <span class="kw">TRUE</span>), ALT)]</code></pre>
+
+    <div class="code-head"><span>02 — Train/test split &amp; three models</span><span>R</span></div>
+    <pre><code><span class="cm"># 80/20 split, keep intensity balanced</span>
+set.seed(123)
+idx <span class="kw">&lt;-</span> <span class="fn">createDataPartition</span>(dat$intensity, p = 0.8, list = <span class="kw">FALSE</span>)
+train <span class="kw">&lt;-</span> dat[idx]; test <span class="kw">&lt;-</span> dat[-idx]
+
+ctrl <span class="kw">&lt;-</span> <span class="fn">trainControl</span>(method = <span class="st">"cv"</span>, number = 10)
+
+<span class="cm"># baseline: plain linear regression</span>
+m_lm  <span class="kw">&lt;-</span> <span class="fn">train</span>(form, train, method = <span class="st">"lm"</span>, trControl = ctrl)
+
+<span class="cm"># random forest</span>
+m_rf  <span class="kw">&lt;-</span> <span class="fn">train</span>(form, train, method = <span class="st">"ranger"</span>, trControl = ctrl,
+              num.trees = 300, importance = <span class="st">"impurity"</span>)
+
+<span class="cm"># xgboost</span>
+m_xgb <span class="kw">&lt;-</span> <span class="fn">train</span>(form, train, method = <span class="st">"xgbTree"</span>, trControl = ctrl)</code></pre>
+
+    <div class="code-head"><span>03 — Evaluation with bootstrap CIs &amp; nested R²</span><span>R</span></div>
+    <pre><code><span class="cm"># bootstrap 95% CIs on the test set</span>
+boot_metric <span class="kw">&lt;-</span> <span class="kw">function</span>(pred, obs, fn, R = 1000) {
+  b <span class="kw">&lt;-</span> <span class="fn">boot</span>(data.frame(pred, obs),
+           <span class="kw">function</span>(d, i) <span class="fn">fn</span>(d[i, ]), R = R)
+  <span class="fn">boot.ci</span>(b, type = <span class="st">"perc"</span>)$percent[4:5]
+}
+
+<span class="cm"># add feature groups one at a time, watch R² move</span>
+m1 <span class="kw">&lt;-</span> <span class="fn">lm</span>(y ~ statin_type + intensity, train)          <span class="cm"># R² = 0.124</span>
+m2 <span class="kw">&lt;-</span> <span class="fn">update</span>(m1, . ~ . + age + sex + race + bmi)       <span class="cm"># +0.004</span>
+m3 <span class="kw">&lt;-</span> <span class="fn">update</span>(m2, . ~ . + labs + blood_pressure + hctz) <span class="cm"># +0.008</span>
+<span class="cm"># statin type &amp; dose do almost all the work</span></code></pre>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-label">Skills</div>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul><li>R</li><li>Python</li><li>SQL</li><li>SAS</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Statistics</h4>
+        <ul><li>Survival analysis (Cox)</li><li>Regression modeling</li><li>Multiple imputation (MICE)</li><li>Bootstrap inference</li><li>Hypothesis testing</li><li>Cross-validation</li><li>Missing-data methods</li><li>Model calibration &amp; validation</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Borui Cai · Health Data Scientist</p>
+    <p><a href="mailto:bcai7799@gmail.com">bcai7799@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  // respect saved pref within session (no storage APIs — just in-memory + system)
+  let theme = 'dark';
+  btn.addEventListener('click', () => {
+    theme = (theme === 'dark') ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '◐' : '◑';
+  });
+</script>
+
+</body>
+</html>
